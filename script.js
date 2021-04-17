@@ -3,28 +3,27 @@ text.innerHTML = text.textContent.replace(/\S/g, "<span>$&</span>"); // match an
 
 const animation = anime.timeline({
 	targets: ".text span",
-	easeing: "easeInOutExpo",
 	loop: true,
 });
 
 animation
 	.add({
-		rotate: function () {
-			return anime.random(-360, 360);
-		},
 		translateX: function () {
 			return anime.random(-500, 500);
 		},
 		translateY: function () {
 			return anime.random(-500, 500);
 		},
-		duration: 5000,
-		delay: anime.stagger(20),
+		opacity: 0,
+		duration: 2000,
+		delay: anime.stagger(5, { start: 500 }),
 	})
 	.add({
 		rotate: 0,
 		translateX: 0,
 		translateY: 0,
-		duration: 5000,
-		delay: anime.stagger(20),
+		duration: 20,
+	})
+	.add({
+		opacity: 1,
 	});
