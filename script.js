@@ -1,12 +1,45 @@
-const text = document.querySelector(".text");
-text.innerHTML = text.textContent.replace(/\S/g, "<span>$&</span>"); // match anything but white space
+const textOne = document.querySelector(".text_1");
+textOne.innerHTML = textOne.textContent.replace(/\S/g, "<span>$&</span>"); // match anything but white space
+const textTwo = document.querySelector(".text_2");
+textTwo.innerHTML = textTwo.textContent.replace(/\S/g, "<span>$&</span>");
 
-const animation = anime.timeline({
-	targets: ".text span",
+const animationOne = anime.timeline({
+	targets: ".text_1 span",
 	loop: true,
 });
 
-animation
+animationOne
+	.add(
+		{
+			translateY: [-200, 0],
+			translateX: (el, i) => {
+				if (i == 0) {
+					return [-300, 0];
+				} else if (i == 4) {
+					return [300, 0];
+				}
+			},
+			scale: [14, 1],
+			opacity: [0, 1],
+			easing: "easeOutCirc",
+			duration: 500,
+			delay: (el, i) => 500 * i,
+		},
+		1200 // absolute offset
+	)
+	.add({
+		translateY: 500,
+		easing: "easeInBack",
+		duration: 800,
+		delay: anime.stagger(100, { start: 400 }),
+	});
+
+const animationTwo = anime.timeline({
+	targets: ".text_2 span",
+	loop: true,
+});
+
+animationTwo
 	.add({
 		translateX: function () {
 			return anime.random(-500, 500);
