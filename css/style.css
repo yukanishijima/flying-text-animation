@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap");
-.section_1, .section_2 {
+.section_1, .section_3 {
   position: relative;
   display: flex;
   justify-content: center;
@@ -8,14 +8,14 @@
   overflow: hidden;
 }
 
-.section_1 .text_1, .section_2 .text_2 {
+.section_1 .text_1, .section_3 .text_3 {
   position: relative;
   text-align: center;
   max-width: 600px;
   opacity: 1;
 }
 
-.section_1 .text_1 span, .section_2 .text_2 span {
+.section_1 .text_1 span, .section_3 .text_3 span {
   position: relative;
   display: inline-block;
 }
@@ -36,11 +36,23 @@
   font-size: 10em;
 }
 
-.section_2 {
+.section_1 .text_2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 500px;
+  width: 500px;
+  color: #2e2f1e;
+  font-size: 9.2em;
+  line-height: 1;
+}
+
+.section_3 {
   background: #efc2c2;
 }
 
-.section_2 .text_2 {
+.section_3 .text_3 {
   color: #148ae0;
   font-size: 2em;
 }

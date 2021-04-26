@@ -16,12 +16,23 @@
 		color: #e83c38;
 		font-size: 10em;
 	}
+	.text_2 {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+		height: 500px;
+		width: 500px;
+		color: #2e2f1e;
+		font-size: 9.2em;
+		line-height: 1;
+	}
 }
 
-.section_2 {
+.section_3 {
 	@extend %section;
 	background: #efc2c2;
-	.text_2 {
+	.text_3 {
 		@extend %text;
 		color: #148ae0;
 		font-size: 2em;
