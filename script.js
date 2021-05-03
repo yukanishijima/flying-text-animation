@@ -27,32 +27,52 @@ while (RandomLetter.length < letters.length) {
 	if (RandomLetter.indexOf(letter) === -1) RandomLetter.push(letter);
 }
 
-const tl = gsap.timeline();
+gsap.registerPlugin(ScrollTrigger);
 
-tl.set(".letter_1", { opacity: 0 });
-tl.set(".section_2", { display: "none" });
-tl.set(".section_3", { display: "none" });
-
-// fly in from the front and drop down
-tl.from(".letter_1", { duration: 0.5, opacity: 0, scale: 10, y: -200, stagger: 0.5 });
-tl.to(".letter_1", { duration: 1.5, opacity: 0, y: 300, ease: "back.inOut(4)", stagger: 0.1 }, "+=0.4");
-tl.to(".section_1", { display: "none" });
-
-// rolling in from the both sides
-tl.set(".letter_2, .letter_3, .letter_4", {
-	x: (i, t) => {
-		console.log(i, t);
-		if (i < 5 || 9 < i) {
-			return -1000;
-		} else {
-			return 1000;
-		}
-	},
+ScrollTrigger.defaults({
+	// markers: true,
+	scrub: 1, // smooth scrubbing, takes 1 second to "catch up" to the scrollbar
 });
 
-tl.to(".section_2", { display: "flex" });
-tl.to(".letter_2, .letter_3, .letter_4", {
-	duration: 3,
+// fly in from the front and drop down
+
+// prettier-ignore
+gsap.timeline({
+  scrollTrigger: {
+    trigger: ".section_1",
+		start: "5", // animation starts when the center of trigger hits the middle of the viewport
+		end: "bottom top", // animation ends when the bottom of trigger hit the top of the viewport
+    pin: true, // pin the trigger element while active
+    // pinSpacing: false,
+    id: "section_1",
+	},
+})
+.set(".letter_1", { opacity: 0 })
+.from(".letter_1", { duration: 5, opacity: 0, scale: 10, y: -200, stagger: 0.5 })
+.to(".letter_1", { duration: 7, opacity: 0, y: 300, ease: "back.inOut(4)", stagger: 0.3 })
+
+// rolling in from the both sides
+
+// prettier-ignore
+gsap.timeline({
+	scrollTrigger: {
+		trigger: ".section_2",
+		start: "top top", // animation starts when the center of trigger hits the middle of the viewport
+    end: "bottom top", // animation ends when the bottom of trigger hit the top of the viewport
+    pin: ".section_2",
+    id: "section_2",
+	},
+})
+.set(".letter_2, .letter_3, .letter_4", {
+  	x: (i, t) => {
+  		if (i < 5 || 9 < i) {
+  			return -1000;
+  		} else {
+  			return 1000;
+  		}
+  	},
+  })
+.to(".letter_2, .letter_3, .letter_4", {
 	x: 0,
 	rotation: (i, t) => {
 		if (i < 5 || 9 < i) {
@@ -61,7 +81,6 @@ tl.to(".letter_2, .letter_3, .letter_4", {
 			return -360 * 3;
 		}
 	},
-	// ease: "back.out(1)",
 	ease: "elastic.out(1, 1)",
 	stagger: {
 		each: 0.2,
@@ -74,10 +93,8 @@ tl.to(".letter_2, .letter_3, .letter_4", {
 			}
 		},
 	},
-});
-
-tl.to(".letter_2, .letter_3, .letter_4", {
-	duration: 1,
+})
+.to(".letter_2, .letter_3, .letter_4", {
 	x: () => {
 		return gsap.utils.random(-1000, 1000);
 	},
@@ -91,13 +108,77 @@ tl.to(".letter_2, .letter_3, .letter_4", {
 			return -360 * 8;
 		}
 	},
+  ease: "slow(0.3, 0.4, false)",
 	scale: 0,
-});
-tl.to(".section_2", { opacity: 0, display: "none" }, "+=0.4");
+})
 
 // appear a letter one by one and disappear all
-tl.to(".section_3", { display: "flex" });
-tl.from(RandomLetter, { duration: 0.5, opacity: 0, stagger: 0.01 });
-tl.to(".letter_5", { opacity: 0 }, "+=0.5");
-tl.to(".letter_5:nth-child(51)", { opacity: 1 }, "-=0.5");
-tl.to(".letter_5:nth-child(51)", { duration: 3, ease: "expo.in", scale: 300 });
+
+// prettier-ignore
+gsap.timeline({
+	scrollTrigger: {
+		trigger: ".section_3",
+		start: "top top", 
+    end: "bottom top", 
+    pin: ".section_3",
+    id: "section_3",
+	},
+})
+.from(RandomLetter, { duration: 5, opacity: 0, stagger: 0.5 })
+.to(".letter_5", { duration: 5, opacity: 0 })
+.to(".letter_5:nth-child(51)", { duration: 5, opacity: 1 })
+.to(".letter_5:nth-child(51)", { duration: 100, ease: "expo.out", scale: 100 })
+.to(".letter_5:nth-child(51)", { opacity: 0})
+.to(".circularText", {duration: 10, rotation: 360 * 10, transformOrigin: '0 50%', repeat: 1, yoyo: true}, "+=5");
+
+// make circular texts
+// https://codepen.io/DevelopIntelligenceBoulder/pen/rrzZoK
+function circularText(text, radius, index) {
+	const txt = text.toUpperCase().split("");
+	const classIndex = document.getElementsByClassName("circularText")[index];
+
+	let deg = 360 / txt.length;
+	let origin = 0;
+
+	txt.forEach((ea) => {
+		ea = `<p style='height:${radius}px; position:absolute; transform:rotate(${origin}deg);transform-origin:0 100%'>${ea}</p>`;
+		classIndex.innerHTML += ea;
+		origin += deg;
+	});
+}
+circularText("Blink * The Power of Thinking Without Thinking * Malcolm Gladwell * ", 200, 0);
+
+// prettier-ignore
+// gsap.timeline({
+// 	scrollTrigger: {
+//     markers: true,
+// 		trigger: ".section_4",
+// 		start: "top top",
+//     end: "bottom top",
+//     pin: ".section_4",
+//     // pinSpacing: false,
+//     id: "section_4",
+// 	},
+// })
+// .to(".malcolm_container", {duration: 0.1, y: 300 })
+// .to(".circularText", {duration: 1, rotation: 360, transformOrigin: '0 50%', y: 0 });
+
+// standalone scrollTrigger for background
+// https://codepen.io/GreenSock/pen/eYpGLYL
+let proxy = { skew: 0 },
+	skewSetter = gsap.quickSetter(".skewElem", "skewY", "deg"), // fast
+	clamp = gsap.utils.clamp(-20, 20); // don't let the skew go beyond 20 degrees.
+
+ScrollTrigger.create({
+	onUpdate: (self) => {
+		let skew = clamp(self.getVelocity() / -300);
+		// only do something if the skew is MORE severe. Remember, we're always tweening back to 0, so if the user slows their scrolling quickly, it's more natural to just let the tween handle that smoothly rather than jumping to the smaller skew.
+		if (Math.abs(skew) > Math.abs(proxy.skew)) {
+			proxy.skew = skew;
+			gsap.to(proxy, { skew: 0, duration: 1.2, ease: "power3", overwrite: true, onUpdate: () => skewSetter(proxy.skew) });
+		}
+	},
+});
+
+// make the right edge "stick" to the scroll bar. force3D: true improves performance
+gsap.set(".skewElem", { transformOrigin: "right center", force3D: true });

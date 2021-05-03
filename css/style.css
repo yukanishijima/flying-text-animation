@@ -30,9 +30,7 @@
 }
 
 .wrap {
-  background: #a6d1c9;
-  width: 100vw;
-  height: 100vh;
+  background: #efd6d6;
 }
 
 .section_1 {
@@ -47,7 +45,7 @@
 .section_2 {
   flex-direction: column;
   align-content: center;
-  background: #a6d1c9;
+  background: #efd6d6;
 }
 
 .section_2 .text_2,
@@ -60,7 +58,8 @@
 .section_3 {
   flex-direction: column;
   align-content: center;
-  background: #a6d1c9;
+  background: #ebefb0;
+  padding-bottom: 30%;
 }
 
 .section_3 .text_5 {
@@ -74,5 +73,28 @@
   color: #2e2f1e;
   font-size: 6em;
   line-height: 1;
+}
+
+.malcom_container {
+  width: 400px;
+  height: 400px;
+  position: relative;
+}
+
+.malcolm {
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 51%;
+  transform: translate(-50%, -50%);
+}
+
+.circularText {
+  display: inline-block;
+  color: #2e2f1e;
+  width: 400px;
+  height: 400px;
+  position: absolute;
+  left: 50%;
 }
 /*# sourceMappingURL=style.css.map */
