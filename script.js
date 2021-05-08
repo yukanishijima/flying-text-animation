@@ -40,24 +40,24 @@ ScrollTrigger.defaults({
 gsap.timeline({
   scrollTrigger: {
     trigger: ".section_1",
-		start: "5", // animation starts when the center of trigger hits the middle of the viewport
-		end: "bottom top", // animation ends when the bottom of trigger hit the top of the viewport
+	start: "5", // animation starts when the center of trigger hits the middle of the viewport
+	end: "bottom top", // animation ends when the bottom of trigger hit the top of the viewport
     pin: true, // pin the trigger element while active
-    // pinSpacing: false,
+    // pinSpacing: false,  // delete any padding which is automatically added for pinning
     id: "section_1",
 	},
 })
 .set(".letter_1", { opacity: 0 })
-.from(".letter_1", { duration: 5, opacity: 0, scale: 10, y: -200, stagger: 0.5 })
-.to(".letter_1", { duration: 7, opacity: 0, y: 300, ease: "back.inOut(4)", stagger: 0.3 })
+.from(".letter_1", { duration: 5, opacity: 0, scale: 10, y: -200, stagger: 1.5 })
+.to(".letter_1", { duration: 5, opacity: 0, y: 300, ease: "back.inOut(4)", stagger: 0.2 })
 
 // rolling in from the both sides
 
 // prettier-ignore
 gsap.timeline({
 	scrollTrigger: {
-		trigger: ".section_2",
-		start: "top top", // animation starts when the center of trigger hits the middle of the viewport
+	trigger: ".section_2",
+	start: "top top", // animation starts when the center of trigger hits the middle of the viewport
     end: "bottom top", // animation ends when the bottom of trigger hit the top of the viewport
     pin: ".section_2",
     id: "section_2",
@@ -108,7 +108,7 @@ gsap.timeline({
 			return -360 * 8;
 		}
 	},
-  ease: "slow(0.3, 0.4, false)",
+    ease: "slow(0.3, 0.4, false)",
 	scale: 0,
 })
 
@@ -117,19 +117,18 @@ gsap.timeline({
 // prettier-ignore
 gsap.timeline({
 	scrollTrigger: {
-		trigger: ".section_3",
-		start: "top top", 
+	trigger: ".section_3",
+	start: "top top",
     end: "bottom top", 
     pin: ".section_3",
     id: "section_3",
 	},
 })
-.from(RandomLetter, { duration: 5, opacity: 0, stagger: 0.5 })
-.to(".letter_5", { duration: 5, opacity: 0 })
-.to(".letter_5:nth-child(51)", { duration: 5, opacity: 1 })
-.to(".letter_5:nth-child(51)", { duration: 100, ease: "expo.out", scale: 100 })
-.to(".letter_5:nth-child(51)", { opacity: 0})
-.to(".circularText", {duration: 10, rotation: 360 * 10, transformOrigin: '0 50%', repeat: 1, yoyo: true}, "+=5");
+.from(RandomLetter, { duration: 10, opacity: 0, stagger: 1 })
+.to(".letter_5", { duration: 5, opacity: 0, display: "none" })
+.to(".letter_5:nth-child(51)", { duration: 50, opacity: 1, display: "inline-block" })
+.to(".letter_5:nth-child(51)", { duration: 80, ease: "expo.out", scale: 80 })
+.to(".letter_5:nth-child(51)", { duration: 1, opacity: 0, display: "none"});
 
 // make circular texts
 // https://codepen.io/DevelopIntelligenceBoulder/pen/rrzZoK
@@ -149,19 +148,15 @@ function circularText(text, radius, index) {
 circularText("Blink * The Power of Thinking Without Thinking * Malcolm Gladwell * ", 200, 0);
 
 // prettier-ignore
-// gsap.timeline({
-// 	scrollTrigger: {
-//     markers: true,
-// 		trigger: ".section_4",
-// 		start: "top top",
-//     end: "bottom top",
-//     pin: ".section_4",
-//     // pinSpacing: false,
-//     id: "section_4",
-// 	},
-// })
-// .to(".malcolm_container", {duration: 0.1, y: 300 })
-// .to(".circularText", {duration: 1, rotation: 360, transformOrigin: '0 50%', y: 0 });
+gsap.timeline({
+	scrollTrigger: {
+	trigger: ".section_4",
+	id: "section_4",
+	},
+})
+.to(".circularText", { duration: 3, rotation: 360 * 2, transformOrigin: '0 50%' })
+.to(".malcolm", { duration: 1, attr: { src: "assets/MG_CLOSED.png" } }, "-=2")
+.to(".malcolm", { duration: 0.5, attr: { src: "assets/MG_OPEN.png" }}, "-=1.8" );
 
 // standalone scrollTrigger for background
 // https://codepen.io/GreenSock/pen/eYpGLYL

@@ -1,15 +1,16 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700;300&display=swap");
 @import "config";
 
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: "Montserrat", sans-serif;
+	font-family: "Poppins", sans-serif;
 }
 
 .wrap {
-	background: #efd6d6;
+	// background: #efd6d6;
+	font-weight: 700;
 }
 
 .section_1 {
@@ -40,7 +41,6 @@
 	flex-direction: column;
 	align-content: center;
 	background: #ebefb0;
-	padding-bottom: 30%;
 	.text_5 {
 		display: flex;
 		justify-content: center;
@@ -55,17 +55,17 @@
 	}
 }
 
-// .section_4 {
-// 	@extend %section;
-// 	flex-direction: column;
-// 	align-content: center;
-// 	height: 100vh;
-// 	background: #ebefb0;
-// }
+.section_4 {
+	@extend %section;
+	flex-direction: column;
+	align-content: center;
+	height: 100vh;
+	background: #dddade;
+}
 
-.malcom_container {
-	width: 400px;
-	height: 400px;
+.malcolm_container {
+	width: 100vw;
+	height: 100vh;
 	position: relative;
 }
 
@@ -80,8 +80,12 @@
 .circularText {
 	display: inline-block;
 	color: #2e2f1e;
+	// font-size: 1.5em;
+	font-weight: 300;
 	width: 400px;
 	height: 400px;
 	position: absolute;
+	top: 50%;
 	left: 50%;
+	transform: translateY(-50%);
 }
