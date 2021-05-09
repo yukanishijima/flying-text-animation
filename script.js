@@ -147,6 +147,8 @@ function circularText(text, radius, index) {
 }
 circularText("Blink * The Power of Thinking Without Thinking * Malcolm Gladwell * ", 200, 0);
 
+// rotate circular texts when coming up from the bottom
+
 // prettier-ignore
 gsap.timeline({
 	scrollTrigger: {
@@ -157,6 +159,22 @@ gsap.timeline({
 .to(".circularText", { duration: 3, rotation: 360 * 2, transformOrigin: '0 50%' })
 .to(".malcolm", { duration: 1, attr: { src: "assets/MG_CLOSED.png" } }, "-=2")
 .to(".malcolm", { duration: 0.5, attr: { src: "assets/MG_OPEN.png" }}, "-=1.8" );
+
+// make Malcolm blink on hover
+
+function blink() {
+	const malcolm = document.querySelector(".malcolm");
+	malcolm.src = "assets/MG_CLOSED.png";
+	setTimeout(() => {
+		malcolm.src = "assets/MG_OPEN.png";
+		setTimeout(() => {
+			malcolm.src = "assets/MG_CLOSED.png";
+			setTimeout(() => {
+				malcolm.src = "assets/MG_OPEN.png";
+			}, 200);
+		}, 200);
+	}, 500);
+}
 
 // standalone scrollTrigger for background
 // https://codepen.io/GreenSock/pen/eYpGLYL
