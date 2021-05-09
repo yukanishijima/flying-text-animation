@@ -30,7 +30,7 @@ while (RandomLetter.length < letters.length) {
 gsap.registerPlugin(ScrollTrigger);
 
 ScrollTrigger.defaults({
-	// markers: true,
+	// markers: true, // put marks for debugging
 	scrub: 1, // smooth scrubbing, takes 1 second to "catch up" to the scrollbar
 });
 
